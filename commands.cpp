@@ -14,6 +14,22 @@ void MyFrame::UpdateAll(wxCommandEvent&) {
     output->SetValue(result);
 }
 
+void MyFrame::RunAndDisplayCommand(const std::string& cmd) {
+    output->Clear(); // Clear the output box first
+    FILE* pipe = popen(cmd.c_str(), "r");
+    if (!pipe) {
+        output->AppendText("Failed to run command.\n");
+        return;
+    }
+
+    char buffer[256];
+    while (fgets(buffer, sizeof(buffer), pipe)) {
+        output->AppendText(wxString::FromUTF8(buffer));
+        wxYield(); // Allows GUI to update between lines
+    }
+    pclose(pipe);
+}
+
 void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event)) {
   Close(true);
 }

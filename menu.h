@@ -16,7 +16,9 @@ private:
 
     void OnListInstalled(wxCommandEvent&);
     void UpdateAll(wxCommandEvent&);
-    std::string RunCommand(const std::string& cmd);
+    void OnUpgradeAll(wxCommandEvent&);
+    void RunAndDisplayCommand(const std::string &cmd);
+    std::string RunCommand(const std::string &cmd);
 };
 
 

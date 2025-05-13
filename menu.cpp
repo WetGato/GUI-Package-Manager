@@ -37,7 +37,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "ArchPkgUI", wxDefaultPosition, 
     installMenu->Append(wxID_ANY, wxT("&Remove"), "Remove a package");
     installMenu->Append(wxID_ANY, wxT("&Update"), "Update a package");*/
     installMenu->Append(ID_UpdateAll, wxT("&Upgrade"), "Upgrade all packages");
-    Connect(ID_UpdateAll, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyFrame::UpdateAll));
+    Connect(ID_UpdateAll, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyFrame::OnUpgradeAll));
     manage->AppendSubMenu(installMenu, wxT("&Install/Remove"));
     
     // Query Submenu
@@ -71,6 +71,10 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "ArchPkgUI", wxDefaultPosition, 
 
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyFrame::OnQuit));
     Centre();
+    }
+    
+    void MyFrame::OnUpgradeAll(wxCommandEvent& event) {
+        RunAndDisplayCommand("sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman -Su --noconfirm");
     }
 
 

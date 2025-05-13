@@ -1,11 +1,11 @@
-// pacman_gui.cpp
+// main.cpp
 #include <wx/wx.h>
 #include <cstdlib>
 #include <memory>
 #include <string>
 #include <sstream>
 
-#include "frame.h"
+#include "menu.h"
 
 
 
@@ -18,3 +18,5 @@ public:
 };
 
 wxIMPLEMENT_APP(MyApp);
+
+//main.cpp

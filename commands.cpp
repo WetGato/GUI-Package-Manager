@@ -1,48 +1,31 @@
 // commands.cpp
-#include <wx/wx.h>
+#ifndef COMMANDS_CPP
+#define COMMANDS_CPP
 
-#include "menu.h"
-
-
-void MyFrame::OnListInstalled(wxCommandEvent&) {
-        std::string result = RunCommand("pacman -Q");
-        output->SetValue(result);
+extern "C" {
+    #include <alpm.h>
 }
 
-void MyFrame::UpdateAll(wxCommandEvent&) {
-    std::string result = RunCommand("sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman -Su --noconfirm");
-    output->SetValue(result);
-}
 
-void MyFrame::RunAndDisplayCommand(const std::string& cmd) {
-    output->Clear(); // Clear the output box first
-    FILE* pipe = popen(cmd.c_str(), "r");
-    if (!pipe) {
-        output->AppendText("Failed to run command.\n");
+#include "include/mainWindow.h"
+
+void MainWindow::LoadInstalledPackages(wxCommandEvent& event) {
+    alpm_errno_t err;
+    alpm_handle_t* handle = alpm_initialize("/", "/var/lib/pacman", &err);
+    if (!handle) {
+        wxMessageBox(wxString::Format("Failed to initialize libalpm: %s", alpm_strerror(err)), "Error", wxICON_ERROR);
         return;
     }
 
-    char buffer[256];
-    while (fgets(buffer, sizeof(buffer), pipe)) {
-        output->AppendText(wxString::FromUTF8(buffer));
-        wxYield(); // Allows GUI to update between lines
+    alpm_db_t* local_db = alpm_get_localdb(handle);
+    alpm_list_t* pkgs = alpm_db_get_pkgcache(local_db);
+
+    for (alpm_list_t* i = pkgs; i; i = i->next) {
+        alpm_pkg_t* pkg = static_cast<alpm_pkg_t*>(i->data);
+        pkgList->Append(wxString::Format("%s %s", alpm_pkg_get_name(pkg), alpm_pkg_get_version(pkg)));
     }
-    pclose(pipe);
+
+    alpm_release(handle);
 }
 
-void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event)) {
-  Close(true);
-}
-
-std::string MyFrame::RunCommand(const std::string& cmd) {
-    std::string data;
-    FILE* stream = popen(cmd.c_str(), "r");
-    if (!stream) return "Failed to run command.";
-
-    char buffer[128];
-    while (fgets(buffer, sizeof(buffer), stream)) {
-        data.append(buffer);
-    }
-    pclose(stream);
-    return data;
-}
+#endif // COMMANDS_CPP

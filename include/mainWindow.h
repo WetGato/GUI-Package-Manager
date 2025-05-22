@@ -4,14 +4,23 @@
 
 #include <wx/wx.h>
 
+
+// Define the primary window and the commands the menus will execute
 class MainWindow : public wxFrame {
     public: 
         MainWindow();
-        void LoadInstalledPackages(wxCommandEvent& event);
-        void OnExit(wxCommandEvent& event);
     private:
-        //void OnExit(wxCommandEvent& event);
         wxListBox* pkgList;
+        // Exits the program
+        void OnExit(wxCommandEvent& event);
+        // Lists all the installed packages
+        void LoadInstalledPackages(wxCommandEvent& event);
+        // Opens the about menu
+        void OnAbout(wxCommandEvent& event);
+        // Lists the packages that can be updated
+        void ListUpgradeablePackages(wxCommandEvent& event);
+
+
 };
 
 

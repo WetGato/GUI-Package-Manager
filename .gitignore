@@ -1,5 +1,6 @@
 .vscode
 personal
 .old
-build
+build/
+ArchPkgUI
 

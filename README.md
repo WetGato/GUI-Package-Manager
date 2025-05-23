@@ -4,7 +4,7 @@
 
 ## Features
 
-- List all installed packages
+- List and Update all installed packages
 - Update package databases
 - List packages that need updates
 - Clean and minimal GUI
@@ -12,5 +12,4 @@
 ## Future features
 - Search for packages
 - View detailed package information
-- Update installed packages
 - Install and remove packages

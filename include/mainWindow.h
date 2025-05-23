@@ -19,6 +19,8 @@ class MainWindow : public wxFrame {
         void OnAbout(wxCommandEvent& event);
         // Lists the packages that can be updated
         void ListUpgradeablePackages(wxCommandEvent& event);
+        // Updates all packages with an availible update
+        void UpdateAllPackages(wxCommandEvent& event);
 
 
 };

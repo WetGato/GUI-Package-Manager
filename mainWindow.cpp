@@ -8,15 +8,15 @@ MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "ArchPkgUI", wxDefaultPosi
     SetMenuBar(MenuBuilder::CreateMenuBar(this));
     //Bind(wxEVT_MENU, &MainWindow::OnExit, this, wxID_EXIT);
 
-    // Making the output for the package list function, package search results function, package info
-    // function, etc.
+    // Making the output for the package list function, package search results 
+    // function, package info function, etc.
 
 
     wxPanel *panel = new wxPanel(this);
     // pkgList = new wxListBox(panel, wxID_ANY, wxPoint(10,10), );
 
-    // Making the size automatic. The static size tends to get cut off when windows is shrunk and 
-    // is too small when the window is expanded 
+    // Making the size automatic. The static size tends to get cut off when 
+    // windows is shrunk and is too small when the window is expanded 
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     pkgList = new wxListBox(panel, wxID_ANY);
@@ -30,6 +30,7 @@ MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "ArchPkgUI", wxDefaultPosi
     win->Bind(wxEVT_MENU, &MainWindow::LoadInstalledPackages, win, ID_QueryPackages);
     win->Bind(wxEVT_MENU, &MainWindow::OnAbout, win, ID_ABOUT);
     win->Bind(wxEVT_MENU, &MainWindow::ListUpgradeablePackages, win, ID_ListUpgradeable);
+    win->Bind(wxEVT_MENU, &MainWindow::UpdateAllPackages, win, ID_UPDATE);
     }
 }
 

@@ -6,8 +6,10 @@ extern "C" {
     #include <alpm.h>
 }
 #include <stdarg.h>
+#include <stdarg.h>
 
 #include "include/mainWindow.h"
+#include "include/aboutBox.h"
 #include "include/aboutBox.h"
 
 void MainWindow::LoadInstalledPackages(wxCommandEvent& event) {

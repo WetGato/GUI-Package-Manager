@@ -14,6 +14,8 @@ wxMenuBar *MenuBuilder::CreateMenuBar(wxFrame *parent)
     wxMenu *queryManagePackageMenu = new wxMenu();
     wxMenu *updatePackageMenu = new wxMenu();
     wxMenu *helpMenu = new wxMenu();
+    wxMenu *updatePackageMenu = new wxMenu();
+    wxMenu *helpMenu = new wxMenu();
 
     menuBar->Append(fileMenu, "&File");
         fileMenu->Append(wxID_EXIT, "&Exit\tAlt-X", "Quit this program");

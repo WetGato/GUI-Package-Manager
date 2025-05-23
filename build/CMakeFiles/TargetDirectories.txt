@@ -1,3 +1,0 @@
-/home/noname/Documents/code/ArchPkgUI/build/CMakeFiles/ArchPkgUI.dir
-/home/noname/Documents/code/ArchPkgUI/build/CMakeFiles/edit_cache.dir
-/home/noname/Documents/code/ArchPkgUI/build/CMakeFiles/rebuild_cache.dir
